@@ -1,6 +1,5 @@
 from typing import List, Tuple
 import json
-from openai import OpenAI
 
 
 class QueryAgent:
@@ -36,7 +35,7 @@ class QueryAgent:
             - Each list must contain exactly 10 strings.
             """.strip()
 
-    def __init__(self, openai: OpenAI):
+    def __init__(self, openai):
         self.client = openai
         self._queries = None # to use cached queries as best as possible (to avoid duplicate LLM calls)
 
@@ -47,6 +46,7 @@ class QueryAgent:
         """
 
         try:
+            print("LLM is generating a response...")
             response = self.client.chat.completions.create(
                 model="gpt-5-mini",
                 messages=[
