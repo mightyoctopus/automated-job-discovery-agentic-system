@@ -49,6 +49,7 @@ class JobPipeline:
         print("Exa has been loaded!")
 
         web_search_service = SearchService(serpapi_client, exa_client, serp_queries, exa_queries)
+        print("Web Search is starting...")
         serp_search_results, exa_search_results = web_search_service.run_web_search()
 
         print("SERP SEARCH RESULTS: ", serp_search_results)

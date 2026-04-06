@@ -50,7 +50,8 @@ class SearchService:
             response = self.exa_client.search(
                 query=q,
                 type="auto",
-                contents={"highlights": {"max_characters": 4000}}
+                contents={"highlights": {"max_characters": 4000}},
+                exclude_domains=["linkedin.com", "indeed.com"]
             )
             print(f"Exa Search Iteration {i + 1} Finished")
 
@@ -74,6 +75,7 @@ class SearchService:
         """
         serp_search_results = self.serpapi_web_search()
         exa_search_results = self.exa_web_search()
+        print(f"Web search has been finished\nSerp: {len(serp_search_results)}\nExa: {len(exa_search_results)}")
 
         return serp_search_results, exa_search_results
 
