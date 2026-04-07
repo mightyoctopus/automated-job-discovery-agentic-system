@@ -29,10 +29,10 @@ class QueryGenerator:
 
                 Requirements:
                 - I need a remote AI engineering role focused on agentic systems, AI agents, RAG pipelines, LoRA/QLoRA fine-tuning, AI integration, AI-driven applications, and LLM engineering including frontier and open-source Hugging Face models.
-                - The role must be remote-friendly for applicants from the global or worldwide region or ASIA, APAC or any upper category that includes South Korea. (Generate most used queries as possible that can include Asia region)
+                - The role MUST be a remote role available for applicants from the global/worldwide region or ASIA, APAC or any upper regional category that includes South Korea. (Generate most used queries as possible that can include Asia region)
                 - Junior, mid-level, internship are preferred. Senior roles are still acceptable if realistic for a 3-year-experience developer.
                 - First {self.num_queries} queries must be formatted for the google search operator style for SERP queries, and the next {self.num_queries} queries are semantic search queries for Exa query style 
-                - It must not target specific job boards like LinkedIn, Indeed etc. It must be queries that search for companies' direct hiring page or ATS including GreenHouse, Lever, Workable or anything that tends to have static HTML for easy web scraping with BS4 
+                - It must not target specific job boards like LinkedIn, Indeed.com, ziprecruiter.com etc. It must be queries that search for companies' direct hiring page or ATS including GreenHouse, Lever, Workable, Ashby, Recuitee, Breezy HR, Zoho Recruit or anything similar to that (ATS) 
                 - Output exactly this JSON schema:
 
                 {{
@@ -40,7 +40,7 @@ class QueryGenerator:
                   "exa": ["... exactly {self.num_queries} strings ..."]
                 }}
 
-                Rules:
+                Format Rules:
                 - Return only raw JSON.
                 - No markdown fences.
                 - No explanation.
