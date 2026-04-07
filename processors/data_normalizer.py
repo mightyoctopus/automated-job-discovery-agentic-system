@@ -23,9 +23,10 @@ class DataNormalizer:
                 text=item.get("text", None), #SerpAPI doesn't return text(Job Description) so it requires to web-scrape later on
                 searched_via=item.get("searched_via", None)
             )
-            print("Data conversion completed")
+
             jobs.append(job)
 
+        print("Data conversion completed")
         print(f"Total jobs collected: {len(jobs)} jobs")
         return jobs
 
