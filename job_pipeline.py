@@ -9,6 +9,7 @@ from exa_py import Exa
 from llm_modules.query_generator import QueryGenerator
 from services.search_service import SearchService
 from processors.data_normalizer import DataNormalizer
+from processors.job_filter import JobFilter
 
 @dataclass
 class JobPipeline:
@@ -61,3 +62,10 @@ class JobPipeline:
         data_normalizer = DataNormalizer(serp_search_results, exa_search_results)
         # all jobs that were finished being normalized
         total_jobs = data_normalizer.normalize_job_data()
+        print("TOTAL JOBS: ", total_jobs)
+
+
+        ### Job Filter ###
+        job_filter = JobFilter(total_jobs)
+        filtered_jobs = job_filter.filter_jobs()
+        print(f"Job has been pre-filtered\nResult: {len(filtered_jobs)} Jobs Remaining")
