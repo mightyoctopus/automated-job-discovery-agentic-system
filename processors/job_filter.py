@@ -6,7 +6,7 @@ class JobFilter:
     """
     Internal logic to filter out job data before passing it to the LLM job evaluator
     """
-    EXCLUDING_SITES = ["linkedin.com", "indeed.com", "ziprecruiter.com", "glassdoor.com"]
+    EXCLUDING_SITES = ["linkedin.com", "indeed.com", "ziprecruiter.com", "glassdoor.com", "huggingface.co"]
     EXCLUDING_WORDS = ["senior", "head", "lead", "principal", "director", "manager"]
 
     def __init__(self, jobs):
