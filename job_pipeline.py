@@ -62,10 +62,11 @@ class JobPipeline:
         data_normalizer = DataNormalizer(serp_search_results, exa_search_results)
         # all jobs that were finished being normalized
         total_jobs = data_normalizer.normalize_job_data()
-        print("TOTAL JOBS: ", total_jobs)
+        print("TOTAL JOBS: ", len(total_jobs))
 
 
         ### Job Filter ###
         job_filter = JobFilter(total_jobs)
         filtered_jobs = job_filter.filter_jobs()
         print(f"Job has been pre-filtered\nResult: {len(filtered_jobs)} Jobs Remaining")
+        print(filtered_jobs)
