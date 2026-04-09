@@ -20,7 +20,7 @@ class WebScraper:
         for i, job in enumerate(self.filtered_jobs):
             if not job.text:
                 try:
-                    response = requests.get(job.url, timeout=12)
+                    response = requests.get(job.url, timeout=12) # to be safe for slow responses sometimes
 
                     if response.status_code != 200:
                         print(f"JOB ID {i + 1}: Failed with status {response.status_code}\nURL: {job.url}")
