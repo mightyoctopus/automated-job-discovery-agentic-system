@@ -8,7 +8,7 @@ class JobFilter:
     """
     EXCLUDING_SITES = ["linkedin.com", "indeed.com", "ziprecruiter.com", "glassdoor.com", "huggingface.co"]
     EXCLUDING_WORDS = ["senior", "head", "lead", "principal", "director", "manager"]
-    AUTO_BROWSING_SITES = ["workable.com"] # Problematic sites for web-scrapping; needed to pass to the LLM auto-browsing logic to handle
+    SITES_For_BROWSER_AUTOMATION = ["workable.com"] # Problematic sites for web-scrapping; needed to pass to the LLM auto-browsing logic to handle
 
     def __init__(self, jobs):
         self.jobs = jobs
@@ -37,7 +37,7 @@ class JobFilter:
                 if not any(word in job.title.lower() for word in self.EXCLUDING_WORDS):
 
                     # Pre-assign low_quality judgment before the web-scraping process
-                    if any(word in job.url.lower() for word in self.AUTO_BROWSING_SITES):
+                    if any(word in job.url.lower() for word in self.SITES_For_BROWSER_AUTOMATION):
                         job.low_quality = True
 
                     filtered_jobs.append(job)
