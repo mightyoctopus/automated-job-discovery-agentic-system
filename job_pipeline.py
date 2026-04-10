@@ -12,6 +12,7 @@ from processors.data_normalizer import DataNormalizer
 from processors.job_filter import JobFilter
 from services.web_scraper import WebScraper
 from processors.quality_checker import QualityChecker
+from utils.domain_shuffling import no_adjacent_same_domain
 
 class JobPipeline:
     """
@@ -74,7 +75,10 @@ class JobPipeline:
 
 
         ### ========== Web Scraper ==========###
-        web_scraper = WebScraper(filtered_jobs)
+        # Shuffle domains and avoid adjacent domain ordering before web-scraping
+        shuffled_jobs = no_adjacent_same_domain(filtered_jobs)
+
+        web_scraper = WebScraper(shuffled_jobs)
         print("Job scraping is in process...")
         scrapped_jobs = web_scraper.web_scrape()
         print(f"NUM OF SCRAPPED JOBS: {len(scrapped_jobs)}")
