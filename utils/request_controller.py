@@ -10,7 +10,7 @@ def no_adjacent_same_domains(jobs: List[Job], max_attempts=50):
     Shuffle jobs to avoid jobs with adjacent domains straight to each other which can cause a throttling with bursty requests to domains (for web-scraping)
     :param jobs: a list of jobs
     :param max_attempts: maximum limit of domain shuffling
-    :return: job list with a shuffled order of root domains
+    :return: a list of Job objects with root domains in a shuffled order
     """
     def get_root_domain(url):
         return urlparse(url).netloc
