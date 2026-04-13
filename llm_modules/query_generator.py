@@ -159,7 +159,7 @@ class QueryGenerator:
         }
 
 
-    # Cache result and avoid calling LLM duplicate
+    # Cache result and avoid calling LLM repeatedly
     def get_queries(self):
         """
         Use case: serp, exa = query_agent.get_queries()
