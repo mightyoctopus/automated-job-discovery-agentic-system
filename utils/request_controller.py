@@ -5,7 +5,7 @@ from job import Job
 import time
 
 
-def no_adjacent_same_domains(jobs: List[Job], max_attempts=50):
+def no_adjacent_same_domains(jobs: List[Job], max_attempts=50) -> List[Job]:
     """
     Shuffle jobs to avoid jobs with adjacent domains straight to each other which can cause a throttling with bursty requests to domains (for web-scraping)
     :param jobs: a list of jobs
