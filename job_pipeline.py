@@ -2,7 +2,6 @@ import os
 from dataclasses import dataclass
 from typing import Optional, List
 from dotenv import load_dotenv
-from openai import OpenAI
 import serpapi
 from exa_py import Exa
 import asyncio
@@ -16,6 +15,7 @@ from services.web_scraper import WebScraper
 from processors.quality_checker import QualityChecker
 from utils.request_controller import no_adjacent_same_domains
 from services.browser_automation import BrowserAutomation
+from llm_modules.job_evaluator import JobEvaluator
 
 class JobPipeline:
     """
@@ -33,11 +33,7 @@ class JobPipeline:
 
         ###========== Search Query Generator Agent Flow ==========###
         print("The main program started running")
-
-        client = OpenAI()
-        print(f"OpenAI model was loaded successfully: {client}")
-
-        query_agent = QueryGenerator(client)
+        query_agent = QueryGenerator()
         serp_queries = query_agent.get_queries()["serp"]
         exa_queries = query_agent.get_queries()["exa"]
 
@@ -108,7 +104,10 @@ class JobPipeline:
         # Combine all jobs before passing it to LLM Evaluator
         all_processed_jobs = valid_jobs + recovered_jobs
 
+        # Filter jobs out further to pass them to the final evaluator:
+        final_input_jobs = [job for job in all_processed_jobs if job.text and len(job.text.split()) > 150]
 
         ###========== LLM Evaluator ==========###
-
+        job_evaluator = JobEvaluator(final_input_jobs)
+        final_job_results = await job_evaluator.run_job_evaluations()
 
