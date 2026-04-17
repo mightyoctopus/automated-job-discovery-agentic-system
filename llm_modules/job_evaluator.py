@@ -31,13 +31,65 @@ class JobEvaluator:
         base_user_prompt = """
             You should filter out irrelevant jobs and only pick out the best jobs that fit theese conditions:
 
-            - They must be an AI engineer jobs (LLM Engineering, RAG, AI Agents, Agentic Systems, LoRA/QLoRA, Machine Learning or any jobs relevant in AI engineering).
-            - they MUST be remote roles that are available for the global/worldwide regions, Asia, or South Korea.
+            - They must be an AI engineer jobs (LLM Engineering, RAG, AI Agents, Agentic Systems, LoRA/QLoRA, Machine Learning or any jobs relevant in AI engineering). Otherwise keep=False.
+            - they MUST be remote roles that are available for the global/worldwide regions, Asia, or South Korea. Otherwise keep=False.
 
-            Rules:
+            1. IMPORTANT REMOTE RULES:
+
+            - The job MUST be accessible to a candidate residing in South Korea.
+
+            - Accept if:
+              - Remote worldwide / global / work from anywhere (with no spefcific regional restrcition)
+              - Remote APAC / Asia (explicitly includes multiple countries, not a single country)
+              - Remote with no location restriction
+
+            - Reject ONLY if:
+              - Remote limited to a single country (e.g., "India Remote", "US Remote", "EU Remote only")
+              - Remote limited to regions that exclude South Korea
+              - Visa/work authorization restriction is clearly stated
+
+            Examples:
+            - "Remote - India only" → keep = False
+            - "Remote - US only" → keep = False
+            - "Remote - APAC" → keep = True
+            - "Remote - Worldwide" → keep = True
+            - "Remote Portugal" → keep = False
+
+
+            2. EDGE CASE – REMOTE JOB BOARDS:
+
+            - If the job is sourced from a known REMOTE JOB BOARD by its url (e.g., Working Nomads, WeWorkRemotely, Remote OK):
+
+              → Do NOT treat the listed country/city as a strict work location.
+              → It often represents the company’s location, not a hiring restriction.
+
+            - In this case:
+              - Ignore the stated location
+              - Analyze the full job description for actual remote constraints
+
+            - If there is NO explicit country restriction:
+              → set manual_check_required = True
+
+            - If NO location mentioned or unclear:
+              → set is_remote_ok = True
+              → set keep = True
+
+            - If you are cofnsued:
+              → set manual_check_required = True
+
+
+            3. OTHER RULES:
             - Reject jobs that are not clearly AI engineering roles
             - Reject non-job pages like blog posts, listings, forums, Github repos etc
             - If the job description is missing or unclear and if it might be possible for remote South Korea, mark manual_check_required = True
+
+
+            4. TIMEZONE / WORK HOURS MATCH RULES:
+
+            - If the required timezone or work time overlap matches Asia or South Korea → keep = True
+            - If timezone overlap is reasonably manageable and the role appears practically workable from South Korea, set keep = True. There's a high chance for Korea then!
+            - If overlap is difficult but still possible for South Korea(remote) → keep = True
+
 
             Return ONLY valid JSON in this format without any comments or explanation:
 
