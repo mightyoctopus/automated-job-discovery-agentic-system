@@ -12,5 +12,4 @@ class Job:
     score: Optional[int] = None
     reason: str = ""
     is_ai_role: Optional[bool] = None
-    is_remote_ok: Optional[bool] = None
     manual_check_required: bool = False
