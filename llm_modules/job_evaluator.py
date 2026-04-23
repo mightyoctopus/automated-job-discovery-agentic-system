@@ -82,6 +82,7 @@ class JobEvaluator:
             - Reject non-job pages like blog posts, listings, forums, Github repos etc
             - If the job description text is missing or extremely insufficient text length, mark manual_check_required = True and keep=False
             - Also, if the job is confusing or unclear for the remote work availability for South Korea, BUT it might be possible to be available for the region, then mark manual_check_required = True and keep=False 
+            - If the job opening is an expired posting, then keep = False
 
 
             4. TIMEZONE / WORK HOURS MATCH RULES:
