@@ -72,7 +72,7 @@ class SearchService:
                     type="auto",
                     contents={"highlights": {"max_characters": 4000}},
                     num_results=100,
-                    exclude_domains=["linkedin.com", "indeed.com", "jobs.weekday.works"],
+                    exclude_domains=["linkedin.com", "indeed.com", "jobs.weekday.works", "internshala.com"],
                     exclude_text=["senior"] #Exclude all results that contain text of senior
                 )
                 print(f"Exa Search Iteration {i + 1} Finished")
