@@ -84,7 +84,7 @@ class SearchService:
                     {
                         "title": result.title,
                         "link": result.url,
-                        "text": result.highlights[0] if result.highlights else None,
+                        "text": " ".join(result.highlights) if result.highlights else None,
                         "searched_via": "exa"
                     }
                     for result in response.results
