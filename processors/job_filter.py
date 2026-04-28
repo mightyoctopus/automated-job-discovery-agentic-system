@@ -16,7 +16,7 @@ class JobFilter:
 
     def filter_jobs(self) -> List[Job]:
         """
-        Filter out data that should be excluded in order to reduce the workload of LLM Evaluator (Save costs and improve latency)
+        Filter out data that should be excluded in order to reduce the workload of Web scraping and LLM Evaluator (Save costs and improve latency)
         """
 
         filtered_jobs = []
